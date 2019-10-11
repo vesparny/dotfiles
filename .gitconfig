@@ -136,11 +136,13 @@
 
 	# https://help.github.com/articles/signing-commits-using-gpg/
 	gpgsign = true
-
+# _CUSTOM
 [diff]
 
 	# Detect copies as well as renames
 	renames = copies
+	tool = kdiff3
+# _CUSTOM_END
 
 [diff "bin"]
 
@@ -152,11 +154,13 @@
 	# Automatically correct and execute mistyped commands
 	autocorrect = 1
 
+# _CUSTOM
 [merge]
 
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
-
+	tool = kdiff3
+# _CUSTOM_END
 [push]
 
 	# https://git-scm.com/docs/git-config#git-config-pushdefault
@@ -185,3 +189,16 @@
 [url "git://gist.github.com/"]
 
 	insteadOf = "gist:"
+
+# _CUSTOM
+[mergetool "kdiff3"]
+
+	cmd = /Applications/kdiff3.app/Contents/MacOS/kdiff3 \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
+	keepTemporaries = false
+	trustExitCode = false
+	keepBackup = false
+
+[difftool "kdiff3"]
+
+	cmd = /Applications/kdiff3.app/Contents/MacOS/kdiff3 "\"$REMOTE\"" "\"$LOCAL\""
+# _CUSTOM_END
